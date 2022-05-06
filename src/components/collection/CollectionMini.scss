@@ -1,0 +1,17 @@
+.collectionsMini {
+  margin-top: 1rem;
+  width: 100%;
+  text-align: left;
+
+  span {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  .thumbnailContainer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background-color: gray;
+  }
+}

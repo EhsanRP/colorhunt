@@ -1,0 +1,31 @@
+
+.thumbnail {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+
+  &::before {
+    content: "";
+    float: left;
+    padding-top: 100%;
+  }
+
+  .color1 {
+    height: 40%;
+  }
+
+  .color2 {
+    height: 25%;
+  }
+
+  .color3 {
+    height: 20%;
+  }
+
+  .color4 {
+    height: 15%;
+  }
+}
+
+
