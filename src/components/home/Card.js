@@ -1,14 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import "./Card.css"
-import {NavLink} from "react-router-dom";
-import axios from "axios";
 import {fetchPaletteById} from "../../functions/paletteApiCalls";
+import LikeContext from "../../context/LikeContext";
 
 const Card = ({id}) => {
 
+    const {state, dispatch, likeChecker} = useContext(LikeContext)
 
     const [dateDifference, setDifference] = useState(0)
-    const [isLiked, setLiked] = useState(false)
+    const [likeChange, setLikeChange] = useState(false)
+    const [isLiked, setIsLiked] = useState(false)
     const [palette, setPalette] = useState({})
 
     useEffect(() => {
@@ -18,8 +19,9 @@ const Card = ({id}) => {
         }
         fetchApi()
 
+        setIsLiked(likeChecker(id))
+    }, [likeChange])
 
-    }, [isLiked])
 
     const setCreationDate = () => {
         let {creationDate} = palette
@@ -44,11 +46,6 @@ const Card = ({id}) => {
         }, 1000)
     }
 
-    const likeHandler = async () => {
-        await axios.put(`http://127.0.0.1:8080/palettes/like/${id}`)
-        setLiked(!isLiked)
-    }
-
     return (
         <div className="palette">
             <div className="colors">
@@ -69,7 +66,7 @@ const Card = ({id}) => {
 
             <div className="data">
 
-                <div className="likes" onClick={likeHandler}>
+                <div className="likes">
                     {
                         isLiked ? <i className="bi bi-heart-fill"></i> : <i className="bi bi-heart"></i>
                     }

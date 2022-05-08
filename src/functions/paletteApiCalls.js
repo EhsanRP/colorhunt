@@ -1,21 +1,36 @@
+import {validateApiCall, validateGetMethod} from "./apiCallValidate";
 import axios from "axios";
 
 const BASE_URL = "http://127.0.0.1:8080/palettes"
 
 export const fetchPalettes = async () => {
-    const response = await axios.get(`${BASE_URL}/all`)
+    let response = null
+    const uri = `${BASE_URL}/all`
+    response = await validateGetMethod(uri)
     return response.data
 }
 
 export const fetchPaletteById = async (id) => {
-    const response = await axios.get(`${BASE_URL}/${id}`)
+    let response = null
+    const uri = `${BASE_URL}/${id}`
+    response = await validateGetMethod(uri)
     return response.data
 }
 
 export const likePalette = async (id) => {
-    const response = await axios.put(`${BASE_URL}/${id}`)
+    let response = null
+    const uri = `${BASE_URL}/${id}`
+    do {
+        response = axios.put(uri)
+    }
+    while (response === null)
 }
 
 export const dislikePalette = async (id) => {
-    const response = await axios.put(`${BASE_URL}/dislike/${id}`)
+    let response = null
+    const uri = `${BASE_URL}/dislike/${id}`
+    do {
+        response = axios.put(uri)
+    }
+    while (response === null)
 }

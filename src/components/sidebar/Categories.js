@@ -14,6 +14,7 @@ const Categories = () => {
         }
 
         fetchAll()
+
     }, [])
 
     return (
