@@ -1,5 +1,4 @@
 import axios from "axios";
-import {logDOM} from "@testing-library/react";
 
 export const validateGetMethod = (uri) => {
 

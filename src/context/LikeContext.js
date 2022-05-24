@@ -1,4 +1,5 @@
 import React, {useEffect, useReducer} from 'react';
+import {dislikePalette, likePalette} from "../functions/paletteApiCalls";
 
 const getLikesArray = () => {
     const likesStr = localStorage.getItem("likes")
@@ -6,39 +7,42 @@ const getLikesArray = () => {
 }
 
 const writeLikesArray = (array) => {
-    localStorage.setItem("likes", array.spread(",,"))
+    localStorage.setItem("likes", array.join(",,"))
 }
 
 const initialState = []
 
-const likeReducer = (state, action, payload) => {
-
+const likeReducer = (state, action) => {
     let existingLikes = getLikesArray()
 
-    switch (action) {
+    const {payload} = action
+
+    switch (action.type) {
         case "LIKE":
-            if (existingLikes.includes(id => payload === id))
-                return state
+            if (existingLikes.includes(payload))
+                return getLikesArray()
 
             existingLikes.push(payload)
+            likePalette(payload)
 
             writeLikesArray(existingLikes)
-            return [existingLikes]
+            return [...existingLikes]
         case "DISLIKE":
-            if (!existingLikes.includes(id => payload === id))
-                return state
+            if (!existingLikes.includes(payload))
+                return getLikesArray()
 
             existingLikes = existingLikes.filter(id => id !== payload)
+            dislikePalette(payload)
 
             writeLikesArray(existingLikes)
-            return [existingLikes]
+            return [...existingLikes]
 
         default:
-            return state
+            return getLikesArray()
     }
 }
 
-export const LikeContext = React.createContext();
+export const LikeContext = React.createContext("");
 const LikeContextProvider = ({children}) => {
 
     const [state, dispatch] = useReducer(likeReducer, initialState)
@@ -50,7 +54,7 @@ const LikeContextProvider = ({children}) => {
     })
 
     const likeChecker = (id) => {
-        return !!getLikesArray().filter(item => item === id)
+        return getLikesArray().includes(id)
     }
 
     return (

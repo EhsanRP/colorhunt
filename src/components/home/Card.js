@@ -1,12 +1,10 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import "./Card.css"
 import {fetchPaletteById} from "../../functions/paletteApiCalls";
-import LikeContext from "../../context/LikeContext";
 
-const Card = ({id}) => {
+const Card = (props) => {
 
-    const {state, dispatch, likeChecker} = useContext(LikeContext)
-
+    const {likes, dispatchMethod, likeChecker} = props
     const [dateDifference, setDifference] = useState(0)
     const [likeChange, setLikeChange] = useState(false)
     const [isLiked, setIsLiked] = useState(false)
@@ -14,12 +12,12 @@ const Card = ({id}) => {
 
     useEffect(() => {
         const fetchApi = async () => {
-            const response = await fetchPaletteById(id)
+            const response = await fetchPaletteById(props.id)
             setPalette(response)
         }
         fetchApi()
-
-        setIsLiked(likeChecker(id))
+        const checkLiked = likeChecker(props.id)
+        setIsLiked(checkLiked)
     }, [likeChange])
 
 
@@ -46,6 +44,18 @@ const Card = ({id}) => {
         }, 1000)
     }
 
+    const likeHandler = () => {
+        const strID = props.id
+        if (isLiked) {
+            dispatchMethod({type: "DISLIKE", payload: strID})
+            setLikeChange(!likeChange)
+        } else {
+            dispatchMethod({type: "LIKE", payload: strID})
+            setLikeChange(!likeChange)
+        }
+        setLikeChange(!likeChange)
+    }
+
     return (
         <div className="palette">
             <div className="colors">
@@ -66,7 +76,7 @@ const Card = ({id}) => {
 
             <div className="data">
 
-                <div className="likes">
+                <div className="likes" onClick={likeHandler}>
                     {
                         isLiked ? <i className="bi bi-heart-fill"></i> : <i className="bi bi-heart"></i>
                     }

@@ -3,9 +3,12 @@ import Card from "./Card"
 import {fetchPalettes} from "../../functions/paletteApiCalls";
 import "./Home.css"
 import Loading from "../loading/Loading";
+import {useContext} from "react";
+import {LikeContext} from "../../context/LikeContext";
 
 const Home = () => {
 
+    const {state, dispatch, likeChecker} = useContext(LikeContext)
     const [data, setData] = useState([])
 
     useEffect(() => {
@@ -20,7 +23,9 @@ const Home = () => {
         <div className="home">
             <div className="palettesContainer">
                 {
-                    data.length ? data.map(item => <Card key={item.id} id={item.id}/>) : <Loading/>
+                    data.length ? data.map(item => <Card key={item.id} id={item.id} likes={state}
+                                                         dispatchMethod={dispatch}
+                                                         likeChecker={likeChecker}/>) : <Loading/>
                 }
 
             </div>
