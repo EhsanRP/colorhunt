@@ -1,0 +1,82 @@
+.palette {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.colors {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.colors::before {
+  content: "";
+  float: left;
+  padding-top: 100%;
+}
+
+.color {
+  position: relative;
+}
+.color span {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 0.3rem 0.8rem;
+  color: white;
+  font-weight: 400;
+  letter-spacing: 1.4px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 0 10px 0 0;
+  opacity: 0;
+  transition: all 250ms ease;
+  cursor: pointer;
+}
+.color:hover span {
+  opacity: 1;
+}
+
+.color1 {
+  height: 40%;
+}
+
+.color2 {
+  height: 25%;
+}
+
+.color3 {
+  height: 20%;
+}
+
+.color4 {
+  height: 15%;
+}
+
+.data {
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.likes {
+  padding: 0.4rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  border-radius: 10px;
+  border: 1px solid #e1e1e1;
+  transition: all 300ms ease;
+  cursor: pointer;
+}
+.likes i {
+  font-size: 1.2rem;
+}
+.likes:hover {
+  background-color: #fbfbfb;
+}
+
+/*# sourceMappingURL=Card.css.map */

@@ -17,16 +17,35 @@ export const fetchPaletteById = async (id) => {
     return response.data
 }
 
-export const likePalette = (id) => {
+export const fetchAllPalettesById = async (idList) => {
+    const uri = `${BASE_URL}/list/all`
+    let response = null
+    do {
+        response = axios.get(uri, {
+            params: {
+                idList: idList
+            }
+        })
+            .catch((error) => {
+
+                return null
+            })
+    } while (response === null)
+    console.log(response.data)
+    return response.data
+}
+
+export const likePalette = async (id) => {
     const uri = `${BASE_URL}/like/${id}`
-    fetch(uri, {method: "PUT"})
-        .then(response => console.log(response))
+    const result = await axios.put(uri)
+    console.log(result)
+    return result
 
 }
 
-export const dislikePalette = (id) => {
+export const dislikePalette = async (id) => {
     const uri = `${BASE_URL}/dislike/${id}`
-    fetch(uri, {method: "PUT"})
-        .then(response => console.log(response))
-
+    const result = await axios.put(uri)
+    console.log(result)
+    return result
 }

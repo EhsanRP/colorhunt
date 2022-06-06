@@ -1,14 +1,15 @@
 
 .thumbnail {
   width: 100%;
-  position: relative;
   overflow: hidden;
   border-radius: 12px;
+  margin-top: 1rem;
+  cursor: pointer;
 
   &::before {
     content: "";
     float: left;
-    padding-top: 100%;
+    padding-top: 50%;
   }
 
   .color1 {

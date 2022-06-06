@@ -10,12 +10,9 @@ root.render(
     <React.StrictMode>
         <BrowserRouter>
             <LikeContextProvider>
-
                 <App/>
             </LikeContextProvider>
-
         </BrowserRouter>
-
     </React.StrictMode>
 );
 

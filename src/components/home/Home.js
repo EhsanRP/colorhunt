@@ -8,7 +8,7 @@ import {LikeContext} from "../../context/LikeContext";
 
 const Home = () => {
 
-    const {state, dispatch, likeChecker} = useContext(LikeContext)
+    const {dispatch, likeChecker} = useContext(LikeContext)
     const [data, setData] = useState([])
 
     useEffect(() => {
@@ -23,8 +23,9 @@ const Home = () => {
         <div className="home">
             <div className="palettesContainer">
                 {
-                    data.length ? data.map(item => <Card key={item.id} id={item.id} likes={state}
-                                                         dispatchMethod={dispatch}
+                    data.length ? data.map(item => <Card key={item.id}
+                                                         palette={item}
+                                                         dispatch={dispatch}
                                                          likeChecker={likeChecker}/>) : <Loading/>
                 }
 

@@ -8,18 +8,15 @@
 .rightTexts {
   padding-bottom: 1rem;
   border-bottom: 1px solid #e1e1e1;
-
-  .lead {
-    font-weight: 600;
-    font-size: 1rem;
-  }
-
-  .subLead {
-    margin-top: 1rem;
-    font-size: 0.8rem;
-    color: rgba(0, 0, 0, 0.7);
-  }
-
+}
+.rightTexts .lead {
+  font-weight: 600;
+  font-size: 1rem;
+}
+.rightTexts .subLead {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.7);
 }
 
 @media screen and (max-width: 900px) {
@@ -27,3 +24,5 @@
     display: none;
   }
 }
+
+/*# sourceMappingURL=RightSide.css.map */

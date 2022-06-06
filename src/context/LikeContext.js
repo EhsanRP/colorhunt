@@ -23,7 +23,6 @@ const likeReducer = (state, action) => {
                 return getLikesArray()
 
             existingLikes.push(payload)
-            likePalette(payload)
 
             writeLikesArray(existingLikes)
             return [...existingLikes]
@@ -32,7 +31,6 @@ const likeReducer = (state, action) => {
                 return getLikesArray()
 
             existingLikes = existingLikes.filter(id => id !== payload)
-            dislikePalette(payload)
 
             writeLikesArray(existingLikes)
             return [...existingLikes]

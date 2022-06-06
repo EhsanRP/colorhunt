@@ -1,0 +1,31 @@
+.thumbnail {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.thumbnail::before {
+  content: "";
+  float: left;
+  padding-top: 50%;
+}
+
+.thumbnail .color1 {
+  height: 40%;
+}
+
+.thumbnail .color2 {
+  height: 25%;
+}
+
+.thumbnail .color3 {
+  height: 20%;
+}
+
+.thumbnail .color4 {
+  height: 15%;
+}
+
+/*# sourceMappingURL=Thumbnail.css.map */
