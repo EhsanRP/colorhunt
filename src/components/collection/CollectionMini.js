@@ -1,8 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "./CollectionMini.css"
-import Thumbnail from "./Thumbnail";
+import {LikeContext} from "../../context/LikeContext";
 
 const CollectionMini = () => {
+
+    const {state} = useState(LikeContext)
+    console.log(state)
 
     return (
         <div className="collectionsMini">

@@ -1,6 +1,5 @@
 import Navbar from "./components/navbar/Navbar";
 import Body from "./components/Body";
-import LikeContextProvider from "./context/LikeContext";
 
 function App() {
 

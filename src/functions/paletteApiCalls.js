@@ -17,29 +17,30 @@ export const fetchPaletteById = async (id) => {
     return response.data
 }
 
-export const fetchAllPalettesById = async (idList) => {
-    const uri = `${BASE_URL}/list/all`
+export const fetchPopular = async () => {
     let response = null
-    do {
-        response = axios.get(uri, {
-            params: {
-                idList: idList
-            }
-        })
-            .catch((error) => {
+    const uri = `${BASE_URL}/popular`
+    response = await validateGetMethod(uri)
+    return response.data
+}
 
-                return null
-            })
-    } while (response === null)
-    console.log(response.data)
+export const fetchPalettesByCategoryId = async (categoryId) => {
+    let response = null
+    const uri = `${BASE_URL}/${categoryId}/all`
+    response = await validateGetMethod(uri)
+    return response.data
+}
+
+export const fetchRandom = async () => {
+    let response = null
+    const uri = `${BASE_URL}/random`
+    response = await validateGetMethod(uri)
     return response.data
 }
 
 export const likePalette = async (id) => {
     const uri = `${BASE_URL}/like/${id}`
-    const result = await axios.put(uri)
-    console.log(result)
-    return result
+    return await axios.put(uri)
 
 }
 

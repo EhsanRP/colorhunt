@@ -1,25 +1,27 @@
 import React, {useContext, useEffect, useState} from 'react';
 import Card from "../shared/Card"
-import {fetchPalettes} from "../../functions/paletteApiCalls";
-import "./Home.css"
+import {fetchPalettesByCategoryId} from "../../functions/paletteApiCalls";
+import "./Category.css"
 import Loading from "../loading/Loading";
 import {LikeContext} from "../../context/LikeContext";
+import {useParams} from "react-router-dom";
 
-const Home = () => {
+const Category = () => {
 
     const {dispatch, likeChecker} = useContext(LikeContext)
     const [data, setData] = useState(null)
 
+    const {categoryId} = useParams();
+
     useEffect(() => {
         const fetchApi = async () => {
-            const result = await fetchPalettes();
+            const result = await fetchPalettesByCategoryId(categoryId);
             setData(result)
         }
 
         fetchApi()
-    }, [])
-    return (
-        <div className="home">
+    }, [categoryId])
+    return (<div className="home">
             <div className="palettesContainer">
                 {data == null && <Loading/>}
                 {data !== null && data.length ? data.map(item => <Card key={item.id}
@@ -38,4 +40,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Category;

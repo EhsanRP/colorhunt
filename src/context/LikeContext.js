@@ -23,7 +23,6 @@ const likeReducer = (state, action) => {
                 return getLikesArray()
 
             existingLikes.push(payload)
-
             writeLikesArray(existingLikes)
             return [...existingLikes]
         case "DISLIKE":
