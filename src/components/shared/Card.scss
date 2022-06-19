@@ -69,21 +69,17 @@
   align-items: center;
 }
 
-.likes {
-  padding: 0.4rem 1rem;
+.openPalette {
+  background-color: transparent;
   display: flex;
+  gap: 0.5rem;
   align-items: center;
-  gap: 1.5rem;
-  border-radius: 10px;
-  border: 1px solid #e1e1e1;
-  transition: all 300ms ease;
+  justify-content: center;
   cursor: pointer;
+  font-size: 0.9rem;
+  color: #3a3a3a;
 
-  i {
-    font-size: 1.2rem;
-  }
-
-  &:hover {
-    background-color: #fbfbfb;
+  .bi {
+    color: #3a3a3a;
   }
 }

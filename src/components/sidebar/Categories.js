@@ -23,7 +23,7 @@ const Categories = () => {
                 {
                     categories.map(item =>
                         <li key={item.id}>
-                            <NavLink to={`/category/` + item.id}
+                            <NavLink to={`${item.id}/category/`}
                                      className={({isActive}) => isActive ? "categoryMenu activeCategory" : "categoryMenu"}>
                                 {item.name}
                             </NavLink>

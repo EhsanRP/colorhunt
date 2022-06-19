@@ -1,10 +1,9 @@
-import {validateGetMethod} from "./apiCallValidate";
+import axios from "axios";
 
-const BASE_URL = "http://127.0.0.1:8080/category"
+const BASE_URL = "http://127.0.0.1:8080/api/v1/categories"
 
 export const fetchCategories = async () => {
-    let response = null
     const uri = `${BASE_URL}/all`
-    response = await validateGetMethod(uri)
+    const response = await axios.get(uri, {params: {approval: true}})
     return response.data
 }

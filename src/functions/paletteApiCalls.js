@@ -1,43 +1,56 @@
-import {validateGetMethod} from "./apiCallValidate";
 import axios from "axios";
 
-const BASE_URL = "http://127.0.0.1:8080/palettes"
+const BASE_URL = "http://127.0.0.1:8080/api/v1/palettes"
+const PAGE_SIZE = 12;
 
-export const fetchPalettes = async () => {
-    let response = null
+export const fetchPalettes = async (page) => {
     const uri = `${BASE_URL}/all`
-    response = await validateGetMethod(uri)
+    const response = await axios.get(uri, {params: {size: PAGE_SIZE, page: page},})
     return response.data
+}
+
+export const fetchAllPalettesById = async (idList) => {
+    const baseURI = `${BASE_URL}/id`
+    const ListURI = idList.map(id => `${baseURI}/${id}`)
+    const response = await axios.all(ListURI.map(uri => axios.get(uri)))
+    return response.map(res => res.data)
 }
 
 export const fetchPaletteById = async (id) => {
-    let response = null
     const uri = `${BASE_URL}/${id}`
-    response = await validateGetMethod(uri)
+    const response = await axios.get(uri)
     return response.data
 }
 
-export const fetchPopular = async () => {
-    let response = null
+export const fetchPopular = async (page) => {
     const uri = `${BASE_URL}/popular`
-    response = await validateGetMethod(uri)
+    const response = await axios.get(uri, {params: {size: PAGE_SIZE, page: page}})
     return response.data
 }
 
-export const fetchPalettesByCategoryId = async (categoryId) => {
-    let response = null
-    const uri = `${BASE_URL}/${categoryId}/all`
-    response = await validateGetMethod(uri)
-    return response.data
-}
-
-export const fetchRandom = async () => {
-    let response = null
+export const fetchRandom = async (page) => {
     const uri = `${BASE_URL}/random`
-    response = await validateGetMethod(uri)
+    const response = await axios.get(uri, {params: {size: PAGE_SIZE, page: page}})
     return response.data
 }
 
+export const fetchPalettesByCategoryId = async (categoryId, page) => {
+    const uri = `${BASE_URL}/all/category/${categoryId}`
+    const response = await axios.get(uri, {params: {size: PAGE_SIZE, page: page}})
+    return response.data
+}
+//
+// export const fetchFamiliar = async (id) => {
+//     const uri = `${BASE_URL}/findFamiliar/${id}`
+//     const response = await axios.get(uri)
+//     return response.data
+// }
+// export const fetchRandom = async () => {
+//     const uri = `${BASE_URL}/random`
+//     const response = await axios.get(uri, {params: {pageSize: 30, pageNumber: 1}})
+//     return response.data
+// }
+//
 export const likePalette = async (id) => {
     const uri = `${BASE_URL}/like/${id}`
     return await axios.put(uri)
@@ -47,6 +60,5 @@ export const likePalette = async (id) => {
 export const dislikePalette = async (id) => {
     const uri = `${BASE_URL}/dislike/${id}`
     const result = await axios.put(uri)
-    console.log(result)
     return result
 }

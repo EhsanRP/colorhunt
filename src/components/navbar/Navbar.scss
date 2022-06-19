@@ -60,6 +60,7 @@ nav {
   align-items: center;
   gap: 1rem;
   cursor: pointer;
+  user-select: none;
 
   i {
     color: #cf5f19;

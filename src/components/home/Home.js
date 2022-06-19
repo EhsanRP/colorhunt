@@ -1,36 +1,102 @@
 import React, {useContext, useEffect, useState} from 'react';
 import Card from "../shared/Card"
-import {fetchPalettes} from "../../functions/paletteApiCalls";
 import "./Home.css"
 import Loading from "../loading/Loading";
-import {LikeContext} from "../../context/LikeContext";
+import {PaletteContext} from "../../context/PaletteContext";
+import {fetchPalettes, fetchPalettesByCategoryId, fetchPopular, fetchRandom} from "../../functions/paletteApiCalls";
+import {useHistory, useParams} from "react-router-dom";
 
 const Home = () => {
 
-    const {dispatch, likeChecker} = useContext(LikeContext)
-    const [data, setData] = useState(null)
+    const {pageName, categoryId} = useParams()
+    const {state, dispatch, likes} = useContext(PaletteContext)
+    const [pageNumber, setPageNumber] = useState(0)
+    const [oldPage, setOldPage] = useState("HOME")
+    console.log(`Page Number ${pageNumber}`)
 
     useEffect(() => {
-        const fetchApi = async () => {
-            const result = await fetchPalettes();
-            setData(result)
+        if (pageName === "popular") {
+
+            if (oldPage !== pageName) {
+                setPageNumber(0)
+                setOldPage(pageName)
+            }
+
+            const fetchPopularPalettes = async () => {
+                const newContent = await fetchPopular(pageNumber)
+                dispatch({type: "INIT", payload: newContent})
+            }
+            fetchPopularPalettes()
+        } else if (pageName === "random") {
+
+            if (oldPage !== pageName) {
+                setPageNumber(0)
+                setOldPage(pageName)
+            }
+
+            const fetchRandomPalettes = async () => {
+                const newContent = await fetchRandom(pageNumber)
+                dispatch({type: "INIT", payload: newContent})
+            }
+            fetchRandomPalettes()
+        } else if (categoryId) {
+
+            if (oldPage !== pageName) {
+                setPageNumber(0)
+                setOldPage(pageName)
+            }
+
+            const fetchCategory = async () => {
+                const newContent = await fetchPalettesByCategoryId(categoryId, pageNumber)
+                dispatch({type: "INIT", payload: newContent})
+
+            }
+            fetchCategory()
+        } else {
+
+            if (oldPage !== pageName) {
+                setPageNumber(0)
+                setOldPage(pageName)
+            }
+
+            const fetchPages = async () => {
+                const newContent = await fetchPalettes(pageNumber)
+                dispatch({type: "INIT", payload: newContent})
+            }
+            fetchPages()
         }
 
-        fetchApi()
-    }, [])
+    }, [pageNumber, pageName, categoryId])
+
+
+    const paginate = async (event) => {
+        console.log(pageNumber)
+        switch (event.target.id) {
+            case "next":
+                setPageNumber(prevState => ++prevState)
+                break
+            case "prev":
+                if (pageNumber > 0) {
+                    setPageNumber(prevState => --prevState)
+                }
+                break
+        }
+    }
     return (
         <div className="home">
             <div className="palettesContainer">
-                {data == null && <Loading/>}
-                {data !== null && data.length ? data.map(item => <Card key={item.id}
-                                                                       palette={item}
-                                                                       dispatch={dispatch}
-                                                                       likeChecker={likeChecker}/>) :
-                    <p>Nothing to show</p>}
+                {state == null && <Loading/>}
+                {state && state.content.map(item => <Card key={item.id}
+                                                          likesContext={likes}
+                                                          dispatch={dispatch}
+                                                          palette={item}/>)}
 
             </div>
-            <div className="rightSide">
 
+            <div className="paginate">
+                {pageNumber > 0 && <div id="prev" className="btn-round" onClick={paginate}>Previous</div>}
+                <div className="btn-round">{pageNumber + 1}</div>
+                {!state.last && <div id="next" className="btn-round" onClick={paginate}>Next</div>}
             </div>
         </div>
 
