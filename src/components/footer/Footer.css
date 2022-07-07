@@ -1,0 +1,20 @@
+footer {
+  text-align: center;
+  width: 100%;
+  padding: 4rem 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  margin-top: 3rem;
+  color: #3a3a3a;
+  user-select: none;
+}
+footer i {
+  color: red;
+}
+
+@media screen and (max-width: 600px) {
+  footer {
+    margin-bottom: 10rem;
+  }
+}
+
+/*# sourceMappingURL=Footer.css.map */

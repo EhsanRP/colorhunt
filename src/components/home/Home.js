@@ -3,7 +3,13 @@ import Card from "../shared/Card"
 import "./Home.css"
 import Loading from "../loading/Loading";
 import {PaletteContext} from "../../context/PaletteContext";
-import {fetchPalettes, fetchPalettesByCategoryId, fetchPopular, fetchRandom} from "../../functions/paletteApiCalls";
+import {
+    fetchAllPalettesById,
+    fetchPalettes,
+    fetchPalettesByCategoryId,
+    fetchPopular,
+    fetchRandom
+} from "../../functions/paletteApiCalls";
 import {useHistory, useParams} from "react-router-dom";
 
 const Home = () => {
@@ -12,7 +18,6 @@ const Home = () => {
     const {state, dispatch, likes} = useContext(PaletteContext)
     const [pageNumber, setPageNumber] = useState(0)
     const [oldPage, setOldPage] = useState("HOME")
-    console.log(`Page Number ${pageNumber}`)
 
     useEffect(() => {
         if (pageName === "popular") {
@@ -39,6 +44,16 @@ const Home = () => {
                 dispatch({type: "INIT", payload: newContent})
             }
             fetchRandomPalettes()
+        } else if (pageName === "collection") {
+            if (oldPage !== pageName) {
+                setPageNumber(0)
+                setOldPage(pageName)
+            }
+            const fetchCollection = async () => {
+                const newContent = await fetchAllPalettesById(likes)
+                dispatch({type: "INIT", payload: {content: [...newContent]}})
+            }
+            fetchCollection()
         } else if (categoryId) {
 
             if (oldPage !== pageName) {
@@ -70,7 +85,6 @@ const Home = () => {
 
 
     const paginate = async (event) => {
-        console.log(pageNumber)
         switch (event.target.id) {
             case "next":
                 setPageNumber(prevState => ++prevState)
@@ -93,11 +107,14 @@ const Home = () => {
 
             </div>
 
-            <div className="paginate">
-                {pageNumber > 0 && <div id="prev" className="btn-round" onClick={paginate}>Previous</div>}
-                <div className="btn-round">{pageNumber + 1}</div>
-                {!state.last && <div id="next" className="btn-round" onClick={paginate}>Next</div>}
-            </div>
+            {
+                pageName !== "collection" &&
+                <div className="paginate">
+                    {pageNumber > 0 && <div id="prev" className="btn-round" onClick={paginate}>Previous</div>}
+                    <div className="btn-round">{pageNumber + 1}</div>
+                    {!state.last && <div id="next" className="btn-round" onClick={paginate}>Next</div>}
+                </div>
+            }
         </div>
 
 

@@ -1,0 +1,101 @@
+.paletteDetails {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 450px;
+}
+.paletteDetails .paletteDetailsColors {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.paletteDetails .paletteDetailsColors div {
+  width: 100%;
+}
+.paletteDetails .paletteDetailsColors div::before {
+  content: "";
+  float: left;
+  padding-top: 25%;
+}
+.paletteDetails .paletteActions {
+  margin-top: 1.2rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  align-items: center;
+}
+.paletteDetails .paletteActions:last-child span {
+  transform: translateX(-5px);
+}
+.paletteDetails .colorDetails {
+  width: 100%;
+  overflow: hidden;
+  margin-top: 5rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.paletteDetails .colorDetails .miniCircles {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+.paletteDetails .colorDetails .miniCircles .colorThumbnail {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.paletteDetails .colorDetails .miniCircles hr {
+  width: 100%;
+  height: 1px;
+  color: black;
+}
+.paletteDetails .colorDetails .colorCodes {
+  color: #3a3a3a;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 2rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+.paletteDetails .colorDetails .rgbCode {
+  font-size: 0.8rem;
+  color: #3a3a3a;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-evenly;
+  padding-top: 2rem;
+}
+
+.randomLead {
+  margin-top: 5rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 600px) {
+  .paletteDetails {
+    margin-top: 0;
+  }
+  .rgbCode {
+    display: none !important;
+  }
+  .randomLead {
+    margin-top: 3rem;
+  }
+}
+
+/*# sourceMappingURL=Palette.css.map */

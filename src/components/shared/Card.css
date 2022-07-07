@@ -52,6 +52,7 @@
 
 .color4 {
   height: 15%;
+  overflow: hidden;
 }
 
 .data {
@@ -60,20 +61,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.openPalette {
-  background-color: transparent;
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 0.9rem;
-  color: #3a3a3a;
-}
-.openPalette .bi {
-  color: #3a3a3a;
 }
 
 /*# sourceMappingURL=Card.css.map */

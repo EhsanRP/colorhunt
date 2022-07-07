@@ -1,0 +1,16 @@
+.openPalette {
+  margin-top: 1rem;
+}
+.openPalette a {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 10px;
+  color: #2b2b2b;
+  font-size: 1rem;
+}
+.openPalette i {
+  font-size: 1.3rem;
+}
+
+/*# sourceMappingURL=OpenPaletteButton.css.map */

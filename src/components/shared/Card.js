@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import "./Card.css"
 import {Link} from "react-router-dom";
+import OpenPaletteButton from "./OpenPaletteButton";
 
 const Card = (props) => {
 
@@ -13,12 +14,11 @@ const Card = (props) => {
     }, [])
 
     const copyData = (event) => {
-        const colorCode = event.target.innerHTML
-        navigator.clipboard.writeText(event.target.innerHTML)
+        navigator.clipboard.writeText(event.target.id)
 
         event.target.innerHTML = "Copied!"
         setTimeout(() => {
-            event.target.innerHTML = colorCode
+            event.target.innerHTML = event.target.id
         }, 1000)
     }
 
@@ -37,16 +37,16 @@ const Card = (props) => {
     return (<div className="palette">
         <div className="colors">
             <div className="color color1" style={{backgroundColor: `${color1}`}}>
-                <span onClick={copyData}>{color1}</span>
+                <span id={color1} onClick={copyData}>{color1}</span>
             </div>
             <div className="color color2" style={{backgroundColor: `${color2}`}}>
-                <span onClick={copyData}>{color2}</span>
+                <span id={color2} onClick={copyData}>{color2}</span>
             </div>
             <div className="color color3" style={{backgroundColor: `${color3}`}}>
-                <span onClick={copyData}>{color3}</span>
+                <span id={color3} onClick={copyData}>{color3}</span>
             </div>
             <div className="color color4" style={{backgroundColor: `${color4}`}}>
-                <span onClick={copyData}>{color4}</span>
+                <span id={color4} onClick={copyData}>{color4}</span>
             </div>
         </div>
 
@@ -58,10 +58,7 @@ const Card = (props) => {
                 <span>{likes}</span>
             </div>
 
-            <Link to={`/showPalette/${id}`} className="openPalette">
-                <i className="bi bi-arrow-up-right-square-fill"></i>
-                <span className="textMuted">Open</span>
-            </Link>
+            <OpenPaletteButton id={id}/>
 
         </div>
 

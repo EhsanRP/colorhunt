@@ -1,7 +1,6 @@
 import React, {useEffect, useReducer, useState} from 'react';
 import {dislikePalette, fetchPalettes, likePalette} from "../functions/paletteApiCalls";
 
-
 const postLike = async (id) => {
     await likePalette(id)
 }
@@ -23,9 +22,8 @@ const likeHandler = (action, id) => {
             postDislike(id)
             likes = likes.filter(item => item !== id)
             break
-
     }
-
+    likes = [...new Set(likes)]
     localStorage.setItem("likes", JSON.stringify(likes))
 }
 
@@ -35,7 +33,6 @@ const paletteReducer = (state, action) => {
 
     const {type, palette} = action
     let index = null
-
     switch (type) {
         case "LIKE":
             index = state.content.indexOf(palette)
@@ -75,6 +72,7 @@ const PaletteContextProvider = ({children}) => {
             localStorage.setItem("likes", initialLikes)
 
         setLikes(JSON.parse(localStorage.getItem("likes")))
+
     }, [])
 
     return (<PaletteContext.Provider value={{state, dispatch, likes}}>

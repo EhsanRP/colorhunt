@@ -1,7 +1,8 @@
 import axios from "axios";
 
-const BASE_URL = "http://127.0.0.1:8080/api/v1/palettes"
-const PAGE_SIZE = 12;
+const BASE_URL = "https://colorhunt-equadesign.fandogh.cloud/api/v1/palettes"
+const LOCAL_BASE_URL = "http://127.0.0.1:8080/api/v1/palettes"
+const PAGE_SIZE = 20;
 
 export const fetchPalettes = async (page) => {
     const uri = `${BASE_URL}/all`
@@ -17,7 +18,7 @@ export const fetchAllPalettesById = async (idList) => {
 }
 
 export const fetchPaletteById = async (id) => {
-    const uri = `${BASE_URL}/${id}`
+    const uri = `${BASE_URL}/id/${id}`
     const response = await axios.get(uri)
     return response.data
 }
